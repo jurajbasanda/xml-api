@@ -1,6 +1,4 @@
-<xml version="1.0" charset="utf-8" encoding="UTF-8 ">
 <bookstore>
-
   <book category="cooking">
     <title lang="en">Everyday Italian</title>
     <author>Giada De Laurentiis</author>
@@ -32,5 +30,4 @@
     <year>2003</year>
     <price>39.95</price>
   </book>
-
 </bookstore>
