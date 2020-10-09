@@ -3,27 +3,36 @@ import axios from 'axios'
 import './App.css';
 
 const App= () => {
-  const [Data,setData] = useState({})
-  const fetch = async () =>{ 
+  const [Data,setData] = useState([])
+  const [Dataxml,setDataxml] = useState([])
+  const fetch = () =>{ 
     try{
-    const res = await axios.get('./data.xml') 
-             await setData(res.data)
-    let parser = new DOMParser()
-    let xmlDOM = parser.parseFromString(Data,'application/xml')
-          console.log(xmlDOM)
-          console.log(Data)
+    axios.get('./data.xml',{"Content-Type": "application/xml"}) 
+          .then(res => setData(res.data))
         }
     catch(error){
       console.log(error.message)
     }
-      }
+  }
+  const xmlFetch =()=>{
+    axios
+.get("https://fakerestapi.azurewebsites.net/api/books", {"Content-Type": "application/xml"})
+.then((response)=> setDataxml(response.data.slice(0, 10)))
+.catch((error)=> {
+  console.log(error)
+});
+  }
+   
+      
   useEffect(() => {
-   fetch()
+   xmlFetch()
+   
   }, [])
 
   return (
     <div className="App">
     <pre>
+    {Dataxml.map(item=> <div key={item.ID}>{item.Title}</div>)}
     </pre>
  </div>
   );
